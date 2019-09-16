@@ -1,0 +1,763 @@
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700&display=swap" rel="stylesheet">
+
+<div class="ficha">
+    <div class="head">
+        <div class="row-dois">
+            <div class="couna">
+                 <div class="campo"><input type="text" name="attr_character_name" />
+                <label>Nome</label></div>
+            </div><div class="coluna">
+                 <div class="campo"><input type="text" name="attr_jogador" />
+                <label>Jogador</label></div>
+            </div>
+        </div>
+        <div class="row-tres">
+        <div class="coluna">
+                <div class="campo"><input type="text" name="attr_character_race" />
+                <label>Raça</label></div> 
+        </div>
+        <div class="coluna">
+                <div class="campo"><input type="text" name="attr_character_origin" />
+                <label>Origem</label></div> 
+        </div>
+        <div class="coluna coluna-divide">
+                <div class="campo">
+                <input type="text" name="attr_character_class" />
+                <label>Classe</label></div> 
+                <div class="campo"><input type="number" name="attr_character_lvl" value="1" min="1" />
+                <input type="hidden" name="attr_metade_nivel" title="@{metade_nivel}" value="(floor((@{character_lvl})/2))" disabled="true" />
+                <label>Nível</label></div> 
+        </div>
+        </div>
+    </div>
+     <div class="corpo">
+          <div class="coluna stats">
+              <div class="atributos">
+              <div class="atributo">
+                    <button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Força}} {{rolagem=[[1d20+@{for_mod}]]}}">Força</button>
+                    <div class="inputs">
+                        <input type="text" class="att" name="attr_for" title="@{for}" value="10" />
+                        <input type="text" class="mod" name="attr_for_mod_fake" title="@{for_mod}" value="@{for_mod}" disabled="true">
+                    </div>
+              </div>
+              <div class="atributo">
+                    <button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Destreza}} {{rolagem=[[1d20+@{des_mod}]]}}">Destreza</button>
+                    <div class="inputs">
+                        <input type="text" class="att" name="attr_des" title="@{des}" value="10" />
+                        <input type="text" class="mod" name="attr_des_mod_fake" title="@{des_mod}" value="@{des_mod}" disabled="true">
+                    </div>
+              </div>
+              <div class="atributo">
+                    <button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Constituição}} {{rolagem=[[1d20+@{con_mod}]]}}">Constituição</button>
+                    <div class="inputs">
+                        <input type="text" class="att" name="attr_con" title="@{con}" value="10" />
+                        <input type="text" class="mod" name="attr_con_mod_fake" title="@{con_mod}" value="@{con_mod}" disabled="true">
+                    </div>
+              </div>
+              <div class="atributo">
+                    <button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Inteligência}} {{rolagem=[[1d20+@{int_mod}]]}}">Inteligência</button>
+                    <div class="inputs">
+                        <input type="text" class="att" name="attr_int" title="@{int}" value="10" />
+                        <input type="text" class="mod" name="attr_int_mod_fake" title="@{int_mod}" value="@{int_mod}" disabled="true">
+                    </div>
+              </div>
+              <div class="atributo">
+                    <button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Sabedoria}} {{rolagem=[[1d20+@{sab_mod}]]}}">Sabedoria</button>
+                    <div class="inputs">
+                        <input type="text" class="att" name="attr_sab" title="@{sab}" value="10" />
+                        <input type="text" class="mod" name="attr_sab_mod_fake" title="@{sab_mod}" value="@{sab_mod}" disabled="true">
+                    </div>
+              </div>
+              <div class="atributo">
+                    <button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Carisma}} {{rolagem=[[1d20+@{car_mod}]]}}">Carisma</button>
+                    <div class="inputs">
+                        <input type="text" class="att" name="attr_car" title="@{car}" value="10" />
+                        <input type="text" class="mod" name="attr_car_mod_fake" title="@{car_mod}" value="@{car_mod}" disabled="true">
+                    </div>
+              </div>
+              </div>
+              <div class="variaveis">
+                  <div class="hp protecao">
+                      <div class="titulo"><i class="fas fa-heartbeat"></i>Pontos de Vida</div>
+                      <div class="inptus">
+                      <div class="max">
+                          <input type="text" name="attr_hp_max" value="0" />
+                          <label>Máximos</label>
+                      </div><div class="atual">
+                          <input type="text" name="attr_hp" value="0" />
+                          <label>Atual</label>
+                       </div>
+                       </div>
+                  </div>
+                  <div class="mana protecao">
+                      <div class="titulo">Pontos de Mana</div>
+                      <div class="inptus">
+                      <div class="max">
+                          <input type="text" name="attr_pm_max" value="0" />
+                          <label>Máximos</label>
+                      </div><div class="atual">
+                          <input type="text" name="attr_pm" value="0" />
+                          <label>Atual</label>
+                       </div>
+                       </div>
+                  </div>
+              </div>
+              <div class="armas">
+                  <div class="head">
+                      <div class="c nome">Ataques</div><div class="c bonus">Bônus Mágico</div><div class="c dano">Dano</div><div class="c critico">Crítico</div><div class="c tipo">Tipo</div><div class="c alcance">Alcance</div>
+                  </div>
+                  <fieldset class="repeating_arma arma">
+                      <div class="weapon">
+                       <div class="weapon-dentro">
+                      <div class="c nome"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{rangearma=0}} {{nomearma=@{arma_nome}}} {{ataque_arma=[[1d20cs>@{arma_critico}+(@{arma_bonus} + (@{arma_pericia}))]]}} {{crit=[[((@{arma_dano})*@{arma_multiplicador})+@{arma_dano_extra}]]}}  {{dano=[[@{arma_dano}+@{arma_dano_extra}]]}} {{tipodano=@{arma_tipo}}}"><span name="attr_arma_nome"></span></button></div><div class="c bonus"><input type="text" name="attr_arma_bonus" placeholder="+1" /></div><div class="c dano"><input type="text" name="attr_arma_dano" placeholder="1d6" />+<input type="text" name="attr_arma_dano_extra" placeholder="+1d6" /></div><div class="c critico"><span name="attr_arma_critico"></span><span>-20</span></div><div class="c tipo"><input type="text" name="attr_arma_tipo" placeholder="Tipo" /></div><div class="c alcance"><span name="attr_arma_alcance"></span></div>
+                      <input type="checkbox" class="editar" name="attr_arma_edit" checked/>
+                      <div class="config">
+                          <div class="campos">
+                                
+                                <div class="linha"><label>Nome: </label><input type="text" name="attr_arma_nome" placeholder="Nome da Arma" /></div>
+                                <div class="linha"><label>Perícia do Ataque: </label><select name="attr_arma_pericia"><option value="@{luta}" selected>Luta</option><option value="@{pontaria}">Pontaria</option></select></div>
+                                <div class="linha">
+                                    <label>Alcance: </label><input type="text" name="attr_arma_alcance" placeholder="20" value="0m" />
+                                </div>
+                                <div class="linha critico">
+                                    <label>Crítico: </label><input type="text" name="attr_arma_critico" placeholder="20" value="20" /><span> - 20</span>
+                                </div>
+                                <div class="linha critico">
+                                    <label>Multiplicador de Crítico: </label><input type="text" name="attr_arma_multiplicador" value="2" placeholder="2" /><span>x</span>
+                                </div>
+                          </div>
+                      </div> 
+                      </div>
+                     </div>
+                   </fieldset>
+                   <div class="foot">
+                       <span>O primeiro campo do dano é o utilizado para o crítico. Coloque no segundo campo de dano os bônus e demais danos (Ex: Ataque Furtivo)</span>
+                   </div>
+              </div>
+              <div class="caracteristicas">
+                 <div class="ca">
+                     <div class="c">
+                         <label>Classe de Armadura</label>
+                         <input type="hidden" name="attr_ca_base" value="10" />
+                         <input name="attr_ca" type="text" class="total" value="((@{ca_base})+(@{des_mod})+(@{armadura})+(@{escudo})+(@{ca_outros}))" disabled="true" />
+                     </div><div class="c mais">
+                        = 10 +
+                     </div><div class="c">
+                         <label>Mod. de Destreza</label>
+                          <input name="attr_ca_des" type="text" value="@{des_mod}" disabled="true" />
+                     </div><div class="c mais">
+                        +
+                     </div><div class="c">
+                         <label>Bônus de Armadura</label>
+                          <input name="attr_ca_armadura" type="text" value="@{armadura}" disabled="true" />
+                     </div><div class="c mais">
+                        +
+                     </div><div class="c">
+                         <label>Bônus de Escudo</label>
+                          <input name="attr_ca_escudo"  type="text" value="@{escudo}" disabled="true" />
+                     </div><div class="c mais">
+                        +
+                     </div><div class="c">
+                         <label>Outros</label>
+                          <input name="attr_ca_outros" type="text" value="0" placeholder="+1" />
+                     </div>
+                 </div>
+                 <div class="ae">
+                     <input type="hidden" name="attr_penalidade_armadura" />
+                     <div class="c">
+                         <label>Armadura & Escudo</label>
+                         <input name="attr_armadura_nome" type="text" value="" />
+                         <input name="attr_escudo_nome" type="text" value="" />
+                     </div><div class="c">
+                         <label>Bônus de CA</label>
+                        <input name="attr_armadura_bonus" type="text" />
+                          <input name="attr_escudo_bonus" type="text" />
+                     </div><div class="c">
+                         <label>Penalidade</label>
+                          <input name="attr_armadura_penalidade" type="text" value="0" />
+                          <input name="attr_escudo_penalidade" type="text" value="0" />
+                     </div>
+                 </div>
+                 <div class="outras">
+                     <div class="titulo">Outras Características</div>
+                     
+                     <fieldset class="repeating_oc oc">
+                         <div class="caracteristica ed">
+                              <input name="attr_oc_nome" type="text" placeholder="Nome da Característica" />
+                              <input type="checkbox" class="editar" name="attr_oc_flag" checked/>
+                              <div class="config">
+                                <textarea name="attr_oc_desc" placeholder="Descra sua característica..."></textarea>  
+                              </div>
+                         </div>
+                     </fieldset>
+                 </div>
+                <div class="habtalmag">
+                     <div class="titulo">Habilidades, Talentos & Magias</div>
+                     <fieldset class="repeating_habtalmag">
+                         <div class="item ed">
+                              <input name="attr_habtalmag_nome" type="text" placeholder="Nome do Talento, Magia ou Habilidade" />
+                              <input type="checkbox" class="editar" name="attr_habtalmag_flag" checked/>
+                              <div class="config">
+                                <textarea name="attr_habtalmag_desc" placeholder="Descra seu talento, magia ou habilidades..."></textarea>  
+                              </div>
+                         </div>
+                     </fieldset>
+                 </div>
+                <div class="equipamentos">
+                     <div class="titulo">Equipamento</div>
+                     <fieldset class="repeating_equipamentos equip">
+                         <div class="item ed">
+                              <div class="col-dois">
+                              <span name="attr_equipamentos_qtd"></span><input name="attr_equipamentos_nome" type="text" placeholder="Nome do Item" />
+                              </div>
+                              <input type="checkbox" class="editar" name="attr_equipamentos_flag" checked/>
+                              <div class="config">
+                                  <div class="campos">
+                                      <div class="linha"><label>Quantidade: </label><input name="attr_equipamentos_qtd" type="text" placeholder="0" /></div>
+                                      <div class="linha"><label>Peso: </label><input name="attr_equipamentos_peso" type="text" placeholder="0" /></div>
+                                      <div class="linha"><label>Descrição: </label><textarea name="attr_equipamentos_desc" placeholder="Descra seu item"></textarea></div>
+                                  </div>
+                              </div>
+                         </div>
+                     </fieldset>
+                     <div class="foot">
+                        <div class="coluna">
+                            <label>T$:</label>
+                            <input type="text" name="attr_tibar" />
+                        </div>
+                        <div class="coluna">
+                            <label>TO:</label>
+                            <input type="text" name="attr_tibar_ouro" />
+                        </div>
+                     </div>
+                 </div>
+              </div>
+          </div>
+           <div class="coluna pericias">
+               <div class="tabela-pericias">
+                   <div class="row head">
+                       <div class="c">Perícias</div>
+                       <div class="c">Total</div>
+                       <div class="c">1/2 do Nível</div>
+                       <div class="c">Mod. de Atributo</div>
+                       <div class="c">Treinada?</div>
+                       <div class="c">Outros</div>
+                   </div>
+                   <input name="attr_proficiencia" type="hidden" value="2" />
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Acrobacia}} {{rolagem=[[1d20+@{acrobacia}]]}}">Acrobacia +</button></div>
+                       <div class="c"><input type="text" name="attr_acrobacia" value="(@{graduacao_acrobacia}) + (@{des_mod}) + (@{acrobaciamod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_acrobacia" value="(-1*(((@{acrobaciaflag})+(-1))*@{metade_nivel})) + ((@{acrobaciaflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_acrobaciades" value="@{des_mod}" disabled="true">
+                       <label class="hint">Des</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_acrobaciaflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_acrobaciamod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Adestramento}} {{rolagem=[[1d20+@{adestramento}]]}}">Adestramento</button></div>
+                       <div class="c"><input type="text" name="attr_adestramento" value="(@{graduacao_adestramento}) + (@{car_mod}) + (@{adestramentomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_adestramento" value="(-1*(((@{adestramentoflag})+(-1))*@{metade_nivel})) + ((@{adestramentoflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_adestramentocar" value="@{car_mod}" disabled="true">
+                       <label class="hint">Car</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_adestramentoflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_adestramentomod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Atletismo}} {{rolagem=[[1d20+@{atletismo}]]}}">Atletismo</button></div>
+                       <div class="c"><input type="text" name="attr_atletismo" value="(@{graduacao_atletismo}) + (@{for_mod}) + (@{atletismomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_atletismo" value="(-1*(((@{atletismoflag})+(-1))*@{metade_nivel})) + ((@{atletismoflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_atletismofor" value="@{for_mod}" disabled="true">
+                       <label class="hint">For</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_atletismoflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_atletismomod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Atuação}} {{rolagem=[[1d20+@{atuacao}]]}}">Atuação</button></div>
+                       <div class="c"><input type="text" name="attr_atuacao" value="(@{graduacao_atuacao}) + (@{car_mod}) + (@{atuacaomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_atuacao" value="(-1*(((@{atuacaoflag})+(-1))*@{metade_nivel})) + ((@{atuacaoflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_atuacaocar" value="@{car_mod}" disabled="true">
+                       <label class="hint">Car</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_atuacaoflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_atuacaomod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Atuação}} {{rolagem=[[1d20+@{cavalgar}]]}}">Cavalgar</button></div>
+                       <div class="c"><input type="text" name="attr_cavalgar" value="(@{graduacao_cavalgar}) + (@{des_mod}) + (@{cavalgarmod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_cavalgar" value="(-1*(((@{cavalgarflag})+(-1))*@{metade_nivel})) + ((@{cavalgarflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_cavalgardes" value="@{des_mod}" disabled="true">
+                       <label class="hint">Des</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_cavalgarflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_cavalgarmod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Conhecimento}} {{rolagem=[[1d20+@{conhecimento}]]}}">Conhecimento *</button></div>
+                       <div class="c"><input type="text" name="attr_conhecimento" value="(@{graduacao_conhecimento}) + (@{int_mod}) + (@{conhecimentomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_conhecimento" value="(-1*(((@{conhecimentoflag})+(-1))*@{metade_nivel})) + ((@{conhecimentoflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_conhecimentoint" value="@{int_mod}" disabled="true">
+                       <label class="hint">Int</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_conhecimentoflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_conhecimentomod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Cura}} {{rolagem=[[1d20+@{cura}]]}}">Cura</button></div>
+                       <div class="c"><input type="text" name="attr_cura" value="(@{graduacao_cura}) + (@{sab_mod}) + (@{curamod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_cura" value="(-1*(((@{curaflag})+(-1))*@{metade_nivel})) + ((@{curaflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_curasab" value="@{sab_mod}" disabled="true">
+                       <label class="hint">Sab</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_curaflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_curamod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Diplomacia}} {{rolagem=[[1d20+@{diplomacia}]]}}">Diplomacia</button></div>
+                       <div class="c"><input type="text" name="attr_diplomacia" value="(@{graduacao_diplomacia}) + (@{car_mod}) + (@{diplomaciamod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_diplomacia" value="(-1*(((@{diplomaciaflag})+(-1))*@{metade_nivel})) + ((@{diplomaciaflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_diplomaciacar" value="@{car_mod}" disabled="true">
+                       <label class="hint">Car</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_diplomaciaflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_diplomaciamod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Enganação}} {{rolagem=[[1d20+@{enganacao}]]}}">Enganação</button></div>
+                       <div class="c"><input type="text" name="attr_enganacao" value="(@{graduacao_enganacao}) + (@{car_mod}) + (@{enganacaomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_enganacao" value="(-1*(((@{enganacaoflag})+(-1))*@{metade_nivel})) + ((@{enganacaoflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_enganacaocar" value="@{car_mod}" disabled="true">
+                       <label class="hint">Car</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_enganacaoflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_enganacaomod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Fortitude}} {{rolagem=[[1d20+@{fortitude}]]}}">Fortitude</button></div>
+                       <div class="c"><input type="text" name="attr_fortitude" value="(@{graduacao_fortitude}) + (@{con_mod}) + (@{fortitudemod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_fortitude" value="(-1*(((@{fortitudeflag})+(-1))*@{metade_nivel})) + ((@{fortitudeflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_fortitudecon" value="@{con_mod}" disabled="true">
+                       <label class="hint">Con</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_fortitudeflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_fortitudemod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Furtividade}} {{rolagem=[[1d20+@{furtividade}]]}}">Furtividade +</button></div>
+                       <div class="c"><input type="text" name="attr_furtividade" value="((@{graduacao_furtividade}) + (@{des_mod}) + (@{furtividademod})) - (@{penalidade_armadura})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_furtividade" value="(-1*(((@{furtividadeflag})+(-1))*@{metade_nivel})) + ((@{furtividadeflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_furtividadedes" value="@{des_mod}" disabled="true">
+                       <label class="hint">Des</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_furtividadeflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_furtividademod" value="0"></div>
+                   </div>
+                    <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Guerra}} {{rolagem=[[1d20+@{guerra}]]}}">Guerra *</button></div>
+                       <div class="c"><input type="text" name="attr_guerra" value="(@{graduacao_guerra}) + (@{int_mod}) + (@{guerramod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_guerra" value="(-1*(((@{guerraflag})+(-1))*@{metade_nivel})) + ((@{guerraflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_guerraint" value="@{int_mod}" disabled="true">
+                       <label class="hint">Int</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_guerraflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_guerramod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Iniciativa}} {{rolagem=[[1d20+@{iniciativa} &{tracker}]]}}">Iniciativa</button></div>
+                       <div class="c"><input type="text" name="attr_iniciativa" value="(@{graduacao_iniciativa}) + (@{des_mod}) + (@{iniciativamod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_iniciativa" value="(-1*(((@{iniciativaflag})+(-1))*@{metade_nivel})) + ((@{iniciativaflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_iniciativades" value="@{des_mod}" disabled="true">
+                       <label class="hint">Des</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_iniciativaflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_iniciativamod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Intimidação}} {{rolagem=[[1d20+@{intimidacao}]]}}">Intimidação</button></div>
+                       <div class="c"><input type="text" name="attr_intimidacao" value="(@{graduacao_intimidacao}) + (@{car_mod}) + (@{intimidacaomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_intimidacao" value="(-1*(((@{intimidacaoflag})+(-1))*@{metade_nivel})) + ((@{intimidacaoflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_intimidacaocar" value="@{car_mod}" disabled="true">
+                       <label class="hint">Car</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_intimidacaoflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_intimidacaomod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Intuição}} {{rolagem=[[1d20+@{intuicao}]]}}">Intuição</button></div>
+                       <div class="c"><input type="text" name="attr_intuicao" value="(@{graduacao_intuicao}) + (@{sab_mod}) + (@{intuicaomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_intuicao" value="(-1*(((@{intuicaoflag})+(-1))*@{metade_nivel})) + ((@{intuicaoflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_intuicaosab" value="@{sab_mod}" disabled="true">
+                       <label class="hint">Sab</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_intuicaoflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_intuicaomod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Jogatina}} {{rolagem=[[1d20+@{jogatina}]]}}">Jogatina</button></div>
+                       <div class="c"><input type="text" name="attr_jogatina" value="(@{graduacao_jogatina}) + (@{car_mod}) + (@{jogatinamod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_jogatina" value="(-1*(((@{jogatinaflag})+(-1))*@{metade_nivel})) + ((@{jogatinaflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_jogatinacar" value="@{car_mod}" disabled="true">
+                       <label class="hint">Car</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_jogatinaflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_jogatinamod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Ladinagem}} {{rolagem=[[1d20+@{ladinagem}]]}}">Ladinagem + *</button></div>
+                       <div class="c"><input type="text" name="attr_ladinagem" value="((@{graduacao_ladinagem}) + (@{des_mod}) + (@{ladinagemmod})) - (@{penalidade_armadura})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_ladinagem" value="(-1*(((@{ladinagemflag})+(-1))*@{metade_nivel})) + ((@{ladinagemflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_ladinagemdes" value="@{des_mod}" disabled="true">
+                       <label class="hint">Des</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_ladinagemflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_ladinagemmod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Luta}} {{rolagem=[[1d20+@{luta}]]}}">Luta</button></div>
+                       <div class="c"><input type="text" name="attr_luta" value="(@{graduacao_luta}) + (@{for_mod}) + (@{lutamod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_luta" value="(-1*(((@{lutaflag})+(-1))*@{metade_nivel})) + ((@{lutaflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_lutafor" value="@{for_mod}" disabled="true">
+                       <label class="hint">For</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_lutaflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_lutamod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Malandragem}} {{rolagem=[[1d20+@{malandragem}]]}}">Malandragem</button></div>
+                       <div class="c"><input type="text" name="attr_malandragem" value="(@{graduacao_malandragem}) + (@{car_mod}) + (@{malandragemmod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_malandragem" value="(-1*(((@{malandragemflag})+(-1))*@{metade_nivel})) + ((@{malandragemflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_malandragemcar" value="@{car_mod}" disabled="true">
+                       <label class="hint">Car</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_malandragemflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_malandragemmod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Misticísmo}} {{rolagem=[[1d20+@{misticismo}]]}}">Misticismo</button></div>
+                       <div class="c"><input type="text" name="attr_misticismo" value="(@{graduacao_misticismo}) + (@{int_mod}) + (@{misticismomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_misticismo" value="(-1*(((@{misticismoflag})+(-1))*@{metade_nivel})) + ((@{misticismoflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_misticismoint" value="@{int_mod}" disabled="true">
+                       <label class="hint">Int</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_misticismoflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_misticismomod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Navegação}} {{rolagem=[[1d20+@{navegacao}]]}}">Navegação</button></div>
+                       <div class="c"><input type="text" name="attr_navegacao" value="(@{graduacao_navegacao}) + (@{sab_mod}) + (@{navegacaomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_navegacao" value="(-1*(((@{navegacaoflag})+(-1))*@{metade_nivel})) + ((@{navegacaoflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_navegacaosab" value="@{sab_mod}" disabled="true">
+                       <label class="hint">Sab</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_navegacaoflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_navegacaomod" value="0"></div>
+                   </div>
+                    <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Nobreza}} {{rolagem=[[1d20+@{nobreza}]]}}">Nobreza *</button></div>
+                       <div class="c"><input type="text" name="attr_nobreza" value="(@{graduacao_nobreza}) + (@{int_mod}) + (@{nobrezamod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_nobreza" value="(-1*(((@{nobrezaflag})+(-1))*@{metade_nivel})) + ((@{nobrezaflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_nobrezaint" value="@{int_mod}" disabled="true">
+                       <label class="hint">Int</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_nobrezaflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_nobrezamod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Ofício}} {{rolagem=[[1d20+@{oficio}]]}}">Ofício</button></div>
+                       <div class="c"><input type="text" name="attr_oficio" value="(@{graduacao_oficio}) + (@{int_mod}) + (@{oficiomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_oficio" value="(-1*(((@{oficioflag})+(-1))*@{metade_nivel})) + ((@{oficioflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_oficioint" value="@{int_mod}" disabled="true">
+                       <label class="hint">Int</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_oficioflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_oficiomod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Percepção}} {{rolagem=[[1d20+@{percepcao}]]}}">Percepção</button></div>
+                       <div class="c"><input type="text" name="attr_percepcao" value="(@{graduacao_percepcao}) + (@{sab_mod}) + (@{percepcaomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_percepcao" value="(-1*(((@{percepcaoflag})+(-1))*@{metade_nivel})) + ((@{percepcaoflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_percepcaosab" value="@{sab_mod}" disabled="true">
+                       <label class="hint">Sab</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_percepcaoflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_percepcaomod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Pontaria}} {{rolagem=[[1d20+@{pontaria}]]}}">Pontaria</button></div>
+                       <div class="c"><input type="text" name="attr_pontaria" value="(@{graduacao_pontaria}) + (@{des_mod}) + (@{pontariamod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_pontaria" value="(-1*(((@{pontariaflag})+(-1))*@{metade_nivel})) + ((@{pontariaflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_pontariades" value="@{des_mod}" disabled="true">
+                       <label class="hint">Des</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_pontariaflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_pontariamod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Reflexos}} {{rolagem=[[1d20+@{reflexos}]]}}">Reflexos</button></div>
+                       <div class="c"><input type="text" name="attr_reflexos" value="(@{graduacao_reflexos}) + (@{des_mod}) + (@{reflexosmod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_reflexos" value="(-1*(((@{reflexosflag})+(-1))*@{metade_nivel})) + ((@{reflexosflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_reflexosdes" value="@{des_mod}" disabled="true">
+                       <label class="hint">Des</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_reflexosflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_reflexosmod" value="0"></div>
+                   </div>
+                    <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Religião}} {{rolagem=[[1d20+@{religiao}]]}}">Religião *</button></div>
+                       <div class="c"><input type="text" name="attr_religiao" value="(@{graduacao_religiao}) + (@{int_mod}) + (@{religiaomod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_religiao" value="(-1*(((@{religiaoflag})+(-1))*@{metade_nivel})) + ((@{religiaoflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_religiaoint" value="@{int_mod}" disabled="true">
+                       <label class="hint">Int</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_religiaoflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_religiaomod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Vontade}} {{rolagem=[[1d20+@{vontade}]]}}">Vontade</button></div>
+                       <div class="c"><input type="text" name="attr_vontade" value="(@{graduacao_vontade}) + (@{sab_mod}) + (@{vontademod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_vontade" value="(-1*(((@{vontadeflag})+(-1))*@{metade_nivel})) + ((@{vontadeflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_vontadesab" value="@{sab_mod}" disabled="true">
+                       <label class="hint">Sab</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_vontadeflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_vontademod" value="0"></div>
+                   </div>
+                   <div class="row body">
+                       <div class="c"><button type="roll" value="&{template:trpg} {{nome=@{character_name}}} {{teste=Sobrevivência}} {{rolagem=[[1d20+@{sobrevivencia}]]}}">Sobrevivência</button></div>
+                       <div class="c"><input type="text" name="attr_sobrevivencia" value="(@{graduacao_sobrevivencia}) + (@{sab_mod}) + (@{sobrevivenciamod})" disabled="true" /></div>
+                       <div class="c"><input type="text" name="attr_graduacao_sobrevivencia" value="(-1*(((@{sobrevivenciaflag})+(-1))*@{metade_nivel})) + ((@{sobrevivenciaflag}+0)*(@{metade_nivel} + @{proficiencia}))" disabled="true"></div>
+                       <div class="c"><input type="text" name="attr_sobrevivenciasab" value="@{sab_mod}" disabled="true">
+                       <label class="hint">Sab</label>
+                       </div>
+                       <div class="c"><input class="treinadaflag" type="checkbox" name="attr_sobrevivenciaflag" value="1"></div>
+                       <div class="c"><input type="text" name="attr_sobrevivenciamod" value="0"></div>
+                   </div>
+               </div>
+               <div class="legenda"><span>+ Penalidade de Armadura</span><span>* Somente treinado</span></div>
+               
+          </div>
+     </div>
+</div>
+
+<rolltemplate class="sheet-rolltemplate-trpg">
+    <div class="trpg-header">{{nome}}</div>
+    <div class="trpg-table">
+        {{#teste}}
+            <div class="trpg-row">
+                <div class="trpg-col"><span class="subtitulo">{{teste}}</span></div>
+            </div>
+        {{/teste}}
+        {{#nomearma}}
+            <div class="trpg-row">
+                <div class="trpg-col"><span class="subtitulo">{{nomearma}}</span></div>
+            </div>
+        {{/nomearma}}
+        {{#efeitoarma}}
+            <div class="trpg-row">
+                <div class="trpg-col"><span class="subtitulo">{{efeitoarma}}</span></div>
+            </div>
+        {{/efeitoarma}}
+        {{#rolagem}}
+            <div class="trpg-roll">{{rolagem}}</div>
+        {{/rolagem}}
+        {{#rangearma}}
+              <div class="trpg-roll">{{ataque_arma}}</div>
+                <div class="trpg-row" style="margin-top:5px"><span class="subtitulo" style="font-style:normal; font-size:0.9em"></span></div>
+        {{/rangearma}}
+        {{#ataque}}
+            <div class="trpg-row" style="margin-top:5px"><span class="subtitulo" style="font-style:normal; font-size:0.9em">Ataque {{ataque}}</span></div>
+        {{/ataque}}
+        {{#dano}}
+        <hr style="margin-bottom:10px; margin-top:10px">
+        <div class="trpg-row">Dano</div>
+                {{#rollWasCrit() ataque_arma}}
+                    <div class="trpg-row"><span style="font-weight: bold; color: #3FB315">CRÍTICO!</span></div>
+                    <div class="trpg-dmgroll">{{crit}}</div>
+                {{/rollWasCrit() ataque_arma}}
+                {{#^rollWasCrit() ataque_arma}}
+                    <div class="trpg-dmgroll" style="padding-top: 5px">{{dano}}</div>
+                {{/^rollWasCrit() ataque_arma}}
+            <div class="trpg-row" style="padding-top:5px">{{tipodano}}</div>
+        {{/dano}}
+    </div>
+    <div class="trpg-footer"></div>
+</rolltemplate>    
+
+<script type="text/worker">
+
+
+
+on("sheet:opened change:armadura_bonus change:escudo_bonus change:armadura_penalidade change:escudo_penalidade", function(){
+   
+   getAttrs(["armadura_bonus","escudo_bonus","armadura_penalidade","escudo_penalidade"], function(v){
+       
+       
+       var armadura = Math.floor(+v.armadura_bonus);
+       if(isNaN(armadura)) {
+           armadura = 0;
+       }
+       var escudo = Math.floor(+v.escudo_bonus);
+       
+        if(isNaN(escudo)) {
+           escudo = 0;
+       }
+      
+      setAttrs({
+         armadura: armadura 
+      });
+       
+     setAttrs({
+         escudo: escudo 
+      }); 
+      
+      setAttrs({
+         penalidade_armadura:  Math.abs(v.armadura_penalidade) + Math.abs(v.escudo_penalidade) 
+      }); 
+      
+     
+       
+   })
+   
+});
+
+
+on("sheet:opened change:des", function(){
+   getAttrs(["des"], function(v){
+      var desmod = Math.floor((v.des - 10) / 2);
+      setAttrs({
+         des_mod: desmod 
+      });
+   }); 
+});
+
+on("sheet:opened change:for", function(){
+   getAttrs(["for"], function(v){
+      var formod = Math.floor((v.for - 10) / 2);
+      setAttrs({
+         for_mod: formod 
+      });
+   }); 
+});
+on("sheet:opened change:con", function(){
+   getAttrs(["con"], function(v){
+      var conmod = Math.floor((v.con - 10) / 2);
+      setAttrs({
+         con_mod: conmod 
+      });
+   }); 
+});
+on("sheet:opened change:int", function(){
+   getAttrs(["int"], function(v){
+      var intmod = Math.floor((v.int - 10) / 2);
+      setAttrs({
+         int_mod: intmod 
+      });
+   }); 
+});
+on("sheet:opened change:sab", function(){
+   getAttrs(["sab"], function(v){
+      var sabmod = Math.floor((v.sab - 10) / 2);
+      setAttrs({
+         sab_mod: sabmod 
+      });
+   }); 
+});
+on("sheet:opened change:car", function(){
+   getAttrs(["car"], function(v){
+      var carmod = Math.floor((v.car - 10) / 2);
+      setAttrs({
+         car_mod: carmod 
+      });
+   }); 
+});
+
+on("sheet:opened change:character_lvl", function() {
+    getAttrs(["character_lvl"], function(v) {
+        var xp = 0;
+        switch(v.character_lvl){
+            case "1":
+                xp = 1000;
+                break;
+            case "2":
+                xp = 3000;
+                break;
+            case "3":
+                xp = 6000;
+                break;
+            case "4":
+                xp = 10000;
+                break;
+            case "5":
+                xp = 15000;
+                break;
+            case "6":
+                xp = 21000;
+                break;
+            case "7":
+                xp = 28000;
+                break;
+            case "8":
+                xp = 36000;
+                break;
+            case "9":
+                xp = 45000;
+                break;
+            case "10":
+                xp = 55000;
+                break;
+            case "11":
+                xp = 66000;
+                break;
+            case "12":
+                xp = 78000;
+                break;
+            case "13":
+                xp = 91000;
+                break;
+            case "14":
+                xp = 105000;
+                break;
+            case "15":
+                xp = 120000;
+                break;
+            case "16":
+                xp = 136000;
+                break;
+            case "17":
+                xp = 153000;
+                break;
+            case "18":
+                xp = 171000;
+                break;
+            case "19":
+                xp = 190000;
+                break;
+            case "20":
+                xp = 210000;
+                break;
+        }
+        setAttrs({
+            XP_max: xp
+        });
+        var proficiencia = 2;
+        if(v.character_lvl <= 6){
+          proficiencia = 2;  
+        }
+        if(v.character_lvl >= 7 && v.character_lvl < 15){
+           proficiencia = 4;  
+        }
+        if(v.character_lvl >= 15){
+           proficiencia = 6;  
+        }
+        
+        setAttrs({
+            proficiencia: proficiencia
+        });
+        
+    });   
+});
+
+</script>
+<script src="https://kit.fontawesome.com/b28aef4fc2.js"></script>
